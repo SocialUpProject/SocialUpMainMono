@@ -37,6 +37,7 @@
           elevation="2"
           large
           color="primary"
+          :disabled="fetching"
           @click="submit">
           Войти
         </v-btn>
@@ -51,7 +52,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
+import { debounce } from 'lodash-es';
 
 export default {
   name: 'Login',
@@ -77,25 +79,30 @@ export default {
     ],
   }),
 
+  computed: {
+    ...mapState('auth', {
+      fetching: state => state.fetching,
+    }),
+  },
+
   methods: {
     ...mapActions('auth', {
       loginUser: 'LOGIN_TO_ACCOUNT',
     }),
-
-    async submit() {
-      if (this.$refs.form.validate()) {
-        try {
-          const res = await this.loginUser({
-            email: this.login,
-            password: this.password,
-          });
-          await this.$router.push({ name: 'Profile', params: { id: res.data.id }});
-        } catch (error) {
-          alert(`Ошибка HTTP: ${error}`);
-          console.error(error);
-        }
+    submit: debounce(async function submit() {
+      if (!this.$refs.form.validate()) return;
+      if (this.fetching) return;
+      try {
+        const res = await this.loginUser({
+          email: this.login,
+          password: this.password,
+        });
+        await this.$router.push({ name: 'Profile', params: { id: res.data.id }});
+      } catch (error) {
+        alert(`Ошибка HTTP: ${error}`);
+        console.error(error);
       }
-    },
+    }, 500),
   },
 };
 </script>
