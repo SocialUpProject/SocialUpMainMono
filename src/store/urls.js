@@ -1,0 +1,18 @@
+export default {
+  login: '/api/login/',
+  logout: '/api/logout/',
+  register: '/api/users/',
+  concreteUser: '/api/users/:id/',
+  users: '/api/users/',
+  currentUser: '/api/user/',
+  posts: '/api/users/:id/posts/',
+  concretePost: '/api/users/:user_id/posts/:post_id/',
+  toggleLike: '/api/posts/:id/toggle-like/',
+  comments: '/api/users/:user_id/posts/:post_id/comments/',
+  concreteComment: '/api/users/:user_id/comments/:comment_id/',
+  subscribe: '/api/users/:id/subscribe/',
+  unsubscribe: '/api/users/:id/unsubscribe/',
+  createChat: '/api/chats/',
+  getChat: '/api/chats/:id/',
+  getChats: '/api/chats/',
+};

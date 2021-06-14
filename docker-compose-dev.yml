@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+#  main:
+#    image: gannicus91/social-up-main:latest
+#    container_name: social_up_main
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - common
+#      - auth
+#      - people
+
+  common:
+    image: gannicus91/social-up-common:latest
+    container_name: social_up_common
+    ports:
+      - 8083:8083
+
+  auth:
+    image: gannicus91/social-up-auth:latest
+    container_name: social_up_auth
+    ports:
+      - 8082:8082
+    depends_on:
+      - common
+#
+#  people:
+#    image: gannicus91/social-up-people:latest
+#    container_name: social_up_people
+#    ports:
+#      - 8081:8081
+#    depends_on:
+#      - common
