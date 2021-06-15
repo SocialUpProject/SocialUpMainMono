@@ -5,7 +5,7 @@
   "homepage": "https://social-up-project.herokuapp.com/",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --modern",
     "lint": "vue-cli-service lint",
     "build-local": "MODE=prod_local vue-cli-service build",
     "serve-prod": "serve -s dist"
@@ -44,8 +44,6 @@
     "vuetify-loader": "^1.7.2"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
+    "defaults"
   ]
 }
