@@ -54,6 +54,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import { debounce } from 'lodash-es';
+import { socket, setSocket } from 'assets/socketio-client';
 
 export default {
   name: 'Login',
@@ -98,6 +99,7 @@ export default {
           password: this.password,
         });
         await this.$router.push({ name: 'Profile', params: { id: res.data.id }});
+        setSocket();
       } catch (error) {
         alert(`Ошибка HTTP: ${error}`);
         console.error(error);
