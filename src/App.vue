@@ -200,6 +200,7 @@ export default {
     async logout() {
       const answer = confirm('Вы действительно хотите выйти?');
       if (answer) {
+        socket.disconnect();
         await this.logoutRequest();
         await this.$router.push({ name: 'Login' });
       }
