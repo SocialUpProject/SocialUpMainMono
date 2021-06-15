@@ -96,7 +96,7 @@ export default {
     socket.on('getMessage', data => {
       this.addMessage(data);
     });
-    socket.on('newMessageInChat', async data => {
+    socket.on('newMessageInChat', data => {
       console.log(data);
       this.updateChatUnread({
         chatId: data.chat,
