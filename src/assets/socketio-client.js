@@ -1,17 +1,24 @@
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 import cookie from 'js-cookie';
 import { config } from '@/assets/utils/constants';
 const baseURL = config.url.API_URL;
 
-export const socket = io(baseURL, {
+export let socket = io(baseURL, {
   withCredentials: true,
   query: {
     token: cookie.get('access_token')?.split(' ')?.[1],
   },
-  extraHeaders: {
-    Authorization: cookie.get('access_token'),
-  },
 });
+
+export function setSocket() {
+  socket.disconnect();
+  socket = io(baseURL, {
+    withCredentials: true,
+    query: {
+      token: cookie.get('access_token')?.split(' ')?.[1],
+    },
+  });
+}
 
 export function sendMessage({ chat, from, text }) {
   socket.emit('sendMessage', {
