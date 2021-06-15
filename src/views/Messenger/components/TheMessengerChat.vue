@@ -137,9 +137,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations('messenger', {
-      addMessage: 'ADD_MESSAGE',
-    }),
 
     ...mapActions('messenger', {
       getChat: 'LOAD_CHAT_HISTORY',
